@@ -4,16 +4,20 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..database import get_async_session
 from .service import user_service
-from .utils import encode_jwt
 from .schemas import (
     UserCreate,
     UserGet,
     UserGetWithPassword,
     Token,
 )
+from .utils import (
+    create_access_token,
+    create_refresh_token,
+)
 from .dependencies import (
     authenticate_user,
     get_current_user,
+    get_current_user_for_refresh,
     get_current_active_user,
 )
 
@@ -52,17 +56,23 @@ async def register(
 def login(
     user: UserGetWithPassword = Depends(authenticate_user),
 ) -> Token:
-    access_token = encode_jwt(
-        payload={
-            "sub": user.id,
-            "username": user.username,
-            "email": user.email,
-        },
-    )
+    access_token = create_access_token(user=user)
+    refresh_token = create_refresh_token(user=user)
 
     return Token(
         access_token=access_token,
-        token_type="Bearer",
+        refresh_token=refresh_token,
+    )
+
+
+@auth_router.post("/refresh", response_model_exclude_none=True)
+def refresh(
+    user: UserGetWithPassword = Depends(get_current_user_for_refresh),
+) -> Token:
+    access_token = create_access_token(user=user)
+
+    return Token(
+        access_token=access_token,
     )
 
 
