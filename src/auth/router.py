@@ -34,7 +34,7 @@ user_router = APIRouter(
 
 # Auth endpoints
 @auth_router.post("/register")
-async def register(
+async def register_user(
     data: UserCreate,
     async_session: AsyncSession = Depends(get_async_session),
 ) -> UserGet:
@@ -53,7 +53,7 @@ async def register(
 
 
 @auth_router.post("/login")
-def login(
+def get_jwt_token(
     user: UserGetWithPassword = Depends(authenticate_user),
 ) -> Token:
     access_token = create_access_token(user=user)
@@ -66,7 +66,7 @@ def login(
 
 
 @auth_router.post("/refresh", response_model_exclude_none=True)
-def refresh(
+def refresh_access_token(
     user: UserGetWithPassword = Depends(get_current_user_for_refresh),
 ) -> Token:
     access_token = create_access_token(user=user)
