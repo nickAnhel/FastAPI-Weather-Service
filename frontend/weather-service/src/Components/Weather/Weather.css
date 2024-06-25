@@ -1,0 +1,11 @@
+.weather {
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.weather-data {
+    padding: 0 300px;
+}
