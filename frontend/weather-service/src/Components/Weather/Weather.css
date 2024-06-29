@@ -7,5 +7,7 @@
 }
 
 .weather-data {
+    font-size: 20px;
+    text-align: center;
     padding: 0 300px;
 }

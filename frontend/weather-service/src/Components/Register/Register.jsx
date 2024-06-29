@@ -1,15 +1,22 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../store";
+import { registerUser } from "../../store/auth/actionCreators";
 import "./Register.css"
 
+
 function Register() {
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const registerUser = (e) => {
+    const registerUserHandler = (e) => {
         e.preventDefault();
-        // console.log(username, password);
-
+        dispatch(registerUser(username, email, password))
+            .then(() => navigate("/"));
     }
 
     return (
@@ -17,7 +24,7 @@ function Register() {
             <div className="register">
                 <h1>Sign Up</h1>
 
-                <form onSubmit={registerUser}>
+                <form onSubmit={registerUserHandler}>
                     <input
                         type="email"
                         placeholder="Email"

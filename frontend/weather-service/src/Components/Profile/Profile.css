@@ -1,0 +1,18 @@
+.profile {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile table {
+    border-collapse: collapse;
+    width: 30%;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.profile td, .profile th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
