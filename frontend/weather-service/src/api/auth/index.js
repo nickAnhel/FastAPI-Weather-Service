@@ -17,7 +17,6 @@ export const register = async (username, email, password) => {
     return await response.json()
 }
 
-
 export const login = async (username, password) => {
     const response = await fetch(Endpoints.BASE + Endpoints.AUTH.LOGIN, {
         method: "POST",
@@ -27,13 +26,6 @@ export const login = async (username, password) => {
         },
         body: `username=${username}&password=${password}`,
     })
-        // .then(response => response.json())
-        // .then(data => {
-        //     // console.log(data);
-        //     return data
-        // })
-
-    // console.log(await response.json())
 
     return await response.json()
 }
@@ -43,6 +35,18 @@ export const getProfile = async (accessToken) => {
         method: "GET",
         headers: {
             "Authorization": `Bearer ${accessToken}`,
+        },
+    })
+    return await response.json()
+}
+
+
+export const refreshToken = async (refreshToken) => {
+    const response = await fetch(Endpoints.BASE + Endpoints.AUTH.REFRESH, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Authorization": `Bearer ${refreshToken}`,
         },
     })
     return await response.json()

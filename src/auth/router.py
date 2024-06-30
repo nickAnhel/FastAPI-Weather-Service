@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends, status
+from fastapi.security import HTTPBearer
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -24,6 +25,7 @@ from .dependencies import (
 auth_router = APIRouter(
     prefix="/auth",
     tags=["Auth"],
+    dependencies=[Depends(HTTPBearer(auto_error=False))],
 )
 
 user_router = APIRouter(

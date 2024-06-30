@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { useAppDispatch } from "../../store";
-import { logoutUser } from '../../store/auth/actionCreators'
+import { logoutUser, getProfile } from '../../store/auth/actionCreators'
 import "./Profile.css"
 
 
@@ -20,16 +20,19 @@ function Profile() {
             <div className="profile">
                 <h1>Profile</h1>
                 <table>
-                    <tr>
-                        <td>Username</td>
-                        <td>{profileData.username}</td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>{profileData.email}</td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>Username</td>
+                            <td>{profileData.username}</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>{profileData.email}</td>
+                        </tr>
+                    </tbody>
                 </table>
                 <button onClick={logoutUserHandler}>Logout</button>
+                {/* <button onClick={() => dispatch(getProfile())}>Update profile</button> */}
             </div>
         </>
     )

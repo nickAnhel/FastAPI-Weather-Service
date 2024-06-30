@@ -31,12 +31,12 @@ def encode_jwt(
     now = datetime.datetime.now(datetime.UTC)
 
     to_encode.update(
-        exp=now + datetime.timedelta(minutes=expire_minutes),
         iat=now,
+        exp=now + datetime.timedelta(minutes=expire_minutes),
     )
 
     return jwt.encode(
-        payload,
+        to_encode,
         private_key,
         algorithm=algorithm,
     )

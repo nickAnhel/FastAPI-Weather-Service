@@ -5,7 +5,7 @@ function Weather() {
         let city = document.querySelector("input").value;
         city  = city ? city : "Moscow";
 
-        fetch(`http://localhost:8080/weather?city=${city}`)
+        fetch(`http://localhost:8080/weather/?city=${city}`)
             .then(response => response.json())
             .then(data => {
                 // console.log(data);

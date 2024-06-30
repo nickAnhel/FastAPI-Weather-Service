@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit"
 
 export const initialState = {
     authData: {
-        acessToken: null,
+        accessToken: null,
+        refreshToken: null,
         isLoading: false,
         error: null,
     },
@@ -29,7 +30,8 @@ export const authReducer = createSlice({
             ...state,
             authData: {
                 ...state.authData,
-                accessToken: action.payload,
+                accessToken: action.payload.accessToken,
+                refreshToken: action.payload.refreshToken,
                 isLoading: false,
                 error: null,
             }
